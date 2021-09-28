@@ -1,0 +1,12 @@
+<div class="container">
+	<form method="POST">
+		<fieldset>
+			<legend>
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit" class="btn btn-primary" value="alpha/myview.html">submit</button>
+			<a class="btn btn-outline-secondary" href="{% url 'myview' %}">Show my Data</a>
+			</legend>
+		</fieldset>
+	</form>
+</div>

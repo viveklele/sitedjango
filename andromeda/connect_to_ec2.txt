@@ -1,0 +1,51 @@
+Check applicatin is running ps -ef | grep python
+
+Step1: login to aws
+move to root dir and change permission of .pem file
+chmod 400 <file_name.pem>
+
+Step2: Connect to django server
+1> change custom tcp port to 8000
+2> run server in browser type <publicip>:8000
+
+Step3 Automet ubuntu Script when server start
+1> start django server through shell script
+2> * make sure give absulute path 
+   #!/bin/bash
+   #sudo fuser -k 8000/tcp
+   #cd andromeda
+   #source bin/activate
+   source /home/ubuntu/andromeda/bin/activate
+   python /home/ubuntu/andromeda/GameLike/manage.py runserver 0:8000
+   paste public ip in url ex. http://35.170.186.168:8000/
+
+3> run shell Script . <filename>.sh
+   chnage file permission chmod +x <file name>
+
+Step4 Run Script after reboot
+1> sudo crontab -e
+2> Give absulute path : @reboot /home/ubuntu/runGameProject.sh
+3> save crontab file ctrl+X >> Y >> Press Enter
+
+
+
+4> To assign load balancer to instance
+select target gorups
+1> Create target group
+2> click on create target group
+3> Give name to the target group > In port write selected port no. In my case 8000 >> next
+4> Select instence to be targeted
+5> Click oon include as pending below
+6> Click on create target group
+
+5> Create load balancer
+1> go to Load balancer 	
+2> Click on create load balancer
+3> Select application load balancer
+4> Give name to the load balancer
+5> select all availability zone >> next >> next
+6> select allow http from anywhere > next  ### Not fount in north virginia 
+7> select existing target group. In my case tgt-example > next > review > create
+
+
+----------------------------------------------
